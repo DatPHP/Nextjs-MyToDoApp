@@ -1,15 +1,15 @@
-import TodoForm from '../../components/TodoForm';
-import { useRouter } from 'next/router';
+"use client";
 
-const CreateTodo = () => {
+import TodoForm from '../../../components/TodoForm';
+import { useRouter } from 'next/navigation';
+
+export default function CreateTodo() {
   const router = useRouter();
 
   return (
-    <div className="p-4">
+    <div>
       <h1 className="text-2xl font-bold mb-4">Create Todo</h1>
       <TodoForm onSuccess={() => router.push('/')} />
     </div>
   );
-};
-
-export default CreateTodo;
+}

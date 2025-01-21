@@ -1,20 +1,18 @@
-// src/pages/index.tsx
-import React from 'react';
+"use client";
+
 import TodoList from '../components/TodoList';
 import Link from 'next/link';
 
-const Home: React.FC = () => {
+export default function Home() {
   return (
-    <div className="p-4">
+    <div>
       <h1 className="text-2xl font-bold mb-4">Todo List</h1>
-      <div>
       <Link href="/todos/create">
-        Create New Todo
+        <button className="bg-blue-500 text-white px-4 py-2 rounded mb-4">
+          Create New Todo
+        </button>
       </Link>
-      </div>
       <TodoList />
     </div>
   );
-};
-
-export default Home;
+}

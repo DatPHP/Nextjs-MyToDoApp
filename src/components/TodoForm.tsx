@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
 import { useMutation, useQueryClient } from 'react-query';
@@ -14,20 +16,38 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSuccess }) => {
   const [completed, setCompleted] = useState(todo?.completed || false);
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(todo ? updateTodo : createTodo, {
+  // Mutation for creating a todo
+  const createMutation = useMutation(createTodo, {
     onSuccess: () => {
       queryClient.invalidateQueries('todos');
       onSuccess?.();
     },
   });
 
+  // Mutation for updating a todo
+  const updateMutation = useMutation(
+    (updates: { id: number; updates: { todo?: string; completed?: boolean } }) =>
+      updateTodo(updates.id, updates.updates),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('todos');
+        onSuccess?.();
+      },
+    }
+  );
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (todo) {
-      mutation.mutate({ id: todo?.id, updates: { todo: title, completed } });
+      // Update existing todo
+      updateMutation.mutate({
+        id: todo.id,
+        updates: { todo: title, completed },
+      });
     } else {
-      mutation.mutate({ todo: title, completed, userId: 1 }); // Assume userId is 1
+      // Create a new todo
+      createMutation.mutate({ todo: title, completed, userId: 1 });
     }
   };
 
@@ -48,7 +68,12 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSuccess }) => {
         }
         label="Completed"
       />
-      <Button type="submit" variant="contained" color="primary">
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        disabled={createMutation.isLoading || updateMutation.isLoading}
+      >
         {todo ? 'Update Todo' : 'Create Todo'}
       </Button>
     </form>

@@ -1,8 +1,11 @@
+"use client";
+
 import { DataGrid } from '@mui/x-data-grid';
 import { useTodosQuery } from '../hooks/useTodosQuery';
 import { Button } from '@mui/material';
 import { useMutation, useQueryClient } from 'react-query';
 import { deleteTodo } from '../services/todosService';
+import Link from 'next/link';
 
 const TodoList = () => {
   const queryClient = useQueryClient();
@@ -17,7 +20,16 @@ const TodoList = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
-    { field: 'todo', headerName: 'Title', width: 250 },
+    {
+      field: 'todo',
+      headerName: 'Title',
+      width: 250,
+      renderCell: (params: any) => (
+        <Link href={`/todos/${params.row.id}`} className="text-blue-500 underline">
+          {params.value}
+        </Link>
+      ),
+    },
     {
       field: 'completed',
       headerName: 'Completed',
@@ -44,7 +56,21 @@ const TodoList = () => {
 
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={todos} columns={columns} pagination pageSizeOptions={[5]} />
+      <DataGrid 
+      rows={todos || []}
+      columns={columns}
+      initialState={{
+        pagination: {
+          paginationModel: {
+            pageSize: 5,
+          },
+        },
+      }}
+      pageSizeOptions={[5]}
+      checkboxSelection
+      disableRowSelectionOnClick
+    />
+    
     </div>
   );
 };

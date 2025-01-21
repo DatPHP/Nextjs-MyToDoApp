@@ -1,3 +1,5 @@
+"use client";
+
 import { Checkbox, Card, CardContent, Typography } from '@mui/material';
 
 type TodoCardProps = {

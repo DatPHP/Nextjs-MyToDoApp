@@ -1,6 +1,7 @@
 import axios from 'axios';
 const API_URL = 'https://dummyjson.com/todos';
 
+// const API_URL = process.env.NEXT_PUBLIC_API_URL;
 interface TodosResponse {
   todos: { id: number; todo: string; completed: boolean }[];
 }
@@ -10,7 +11,7 @@ export const fetchTodos = async () => {
   return data?.todos;
 };
 
-export const createTodo = async (todo: { todo: string; completed: boolean }) => {
+export const createTodo = async (todo: { todo: string; completed: boolean; userId: number }) => {
   const { data } = await axios.post(`${API_URL}/add`, todo);
   return data;
 };
