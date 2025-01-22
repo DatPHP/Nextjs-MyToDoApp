@@ -3,14 +3,14 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { useTodosQuery } from '../hooks/useTodosQuery';
 import { Button } from '@mui/material';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteTodo } from '../services/todosService';
 import Link from 'next/link';
 
 const TodoList = () => {
   const queryClient = useQueryClient();
-  const deleteMutation = useMutation(deleteTodo, {
-    onSuccess: () => queryClient.invalidateQueries('todos'),
+  const deleteMutation = useMutation({ mutationFn: deleteTodo, 
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
   });
 
   const handleDelete = (id: number) => {
@@ -57,16 +57,18 @@ const TodoList = () => {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid 
+      paginationMode="server"
       rows={todos || []}
       columns={columns}
       initialState={{
         pagination: {
           paginationModel: {
-            pageSize: 5,
+            pageSize: 50,
           },
         },
       }}
-      pageSizeOptions={[5]}
+      rowCount={254}
+      pageSizeOptions={[50]}
       checkboxSelection
       disableRowSelectionOnClick
     />

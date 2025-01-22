@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query'
 import { fetchTodoById } from '../../../services/todosService';
 import { useRouter } from 'next/navigation';
 import TodoForm from '../../../components/TodoForm';
@@ -14,7 +14,9 @@ export default function TodoDetails({ params }: { params: Promise<{ id: string }
     params.then(resolvedParams => setUnwrappedParams(resolvedParams));
   }, [params]);
 
-  const { data: todo, isLoading, error } = useQuery(['todo', unwrappedParams?.id], () => fetchTodoById(Number(unwrappedParams?.id)), {
+  const { data: todo, isLoading, error } = useQuery({
+    queryKey: ['todo', unwrappedParams?.id],
+    queryFn: () => fetchTodoById(Number(unwrappedParams?.id)),
     enabled: !!unwrappedParams,
   });
 
