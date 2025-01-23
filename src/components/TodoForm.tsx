@@ -6,12 +6,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createTodo, updateTodo } from '../services/todosService';
 import { Todo } from '../types/todos';
 
-interface TodoFormProps {
+interface ITodoForm {
   todo?: Todo; // For edit mode
   onSuccess?: () => void;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({ todo, onSuccess }) => {
+const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
   const [title, setTitle] = useState(todo?.todo || '');
   const [completed, setCompleted] = useState(todo?.completed || false);
   const queryClient = useQueryClient();

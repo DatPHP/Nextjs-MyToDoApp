@@ -57,18 +57,16 @@ const TodoList = () => {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid 
-      paginationMode="server"
       rows={todos || []}
       columns={columns}
       initialState={{
         pagination: {
           paginationModel: {
-            pageSize: 50,
+            pageSize: 5,
           },
         },
       }}
-      rowCount={254}
-      pageSizeOptions={[50]}
+      pageSizeOptions={[5]}
       checkboxSelection
       disableRowSelectionOnClick
     />
