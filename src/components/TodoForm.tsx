@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createTodo, updateTodo } from '../services/todosService';
+import { createTodo, updateTodo } from '@services/todosService';
 import { Todo } from '../types/todos';
 
 interface ITodoForm {

@@ -1,10 +1,10 @@
 "use client";
 
 import { DataGrid } from '@mui/x-data-grid';
-import { useTodosQuery } from '../hooks/useTodosQuery';
+import { useTodosQuery } from '@hooks/useTodosQuery';
 import { Button } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteTodo } from '../services/todosService';
+import { deleteTodo } from '@services/todosService';
 import Link from 'next/link';
 
 const TodoList = () => {

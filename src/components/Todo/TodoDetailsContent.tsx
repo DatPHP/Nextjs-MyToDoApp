@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fetchTodoById } from "../../services/todosService";
+import { fetchTodoById } from "@services/todosService";
 import { useRouter } from "next/navigation";
 import TodoForm from "../TodoForm";
 
