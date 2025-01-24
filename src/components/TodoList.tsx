@@ -55,7 +55,7 @@ const TodoList = () => {
   if (error) return <p>Error loading todos!</p>;
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: '800px' }}>
       <DataGrid 
       rows={todos || []}
       columns={columns}
