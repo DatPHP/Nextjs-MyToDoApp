@@ -1,5 +1,5 @@
-import axios from 'axios';
-const API_URL = 'https://dummyjson.com/todos';
+import axios from "axios";
+const API_URL = "https://dummyjson.com/todos";
 
 // const API_URL = process.env.NEXT_PUBLIC_API_URL;
 interface TodosResponse {
@@ -11,7 +11,11 @@ export const fetchTodos = async () => {
   return data?.todos;
 };
 
-export const createTodo = async (todo: { todo: string; completed: boolean; userId: number }) => {
+export const createTodo = async (todo: {
+  todo: string;
+  completed: boolean;
+  userId: number;
+}) => {
   const { data } = await axios.post(`${API_URL}/add`, todo);
   return data;
 };
@@ -23,7 +27,10 @@ export const fetchTodoById = async (id: number) => {
 };
 
 // Update an existing todo
-export const updateTodo = async (id: number, updates: { todo?: string; completed?: boolean }) => {
+export const updateTodo = async (
+  id: number,
+  updates: { todo?: string; completed?: boolean },
+) => {
   const { data } = await axios.put(`${API_URL}/${id}`, updates);
   return data;
 };
@@ -33,6 +40,3 @@ export const deleteTodo = async (id: number) => {
   const { data } = await axios.delete(`${API_URL}/${id}`);
   return data;
 };
-
-
-

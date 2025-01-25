@@ -1,27 +1,26 @@
-import DateHeader from '@components/DateHeader';
-import TodoList from '../components/TodoList';
-import Link from 'next/link';
-
+import DateHeader from "@components/DateHeader";
+import TodoList from "../components/TodoList";
+import Link from "next/link";
+import { IconButton } from "@mui/material";
+import { AddBoxRounded } from "@mui/icons-material";
 
 export default function Home() {
   return (
-    <div className="bg-white p-4 mx-auto mt-4">
-      <div className="bg-gray-100 w-[800px] mx-auto p-4 mt-4 border border-gray-200 rounded-md">
-        <div className="flex flex-col">
-        <div><DateHeader /></div>
-          <h1 className="text-2xl font-bold mb-4">Todo List</h1>
-          <div>
+    <div className="min-h-screen bg-gray-50 flex justify-center">
+      <div className="w-[800px] bg-white padding-4 mt-4 rounded-md border border-gray-200">
+        <DateHeader />
+        <main className="p-4">
+          <div className="space-y-4">
+            <TodoList />
+          </div>
+          <div className="flex justify-end mt-10">
             <Link href="/todos/create">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded mb-4">
-                Create New Todo
-              </button>
+              <IconButton className=" w-15 h-15 rounded-lg flex items-center justify-center shadow-lg">
+                <AddBoxRounded fontSize="large" />
+              </IconButton>
             </Link>
           </div>
-        </div>
-        <div className="flex flex-col justify-center items-center">
-          
-          <TodoList />
-        </div>
+        </main>
       </div>
     </div>
   );

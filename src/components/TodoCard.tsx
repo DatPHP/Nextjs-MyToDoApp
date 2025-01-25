@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkbox, Card, CardContent, Typography } from '@mui/material';
+import { Checkbox, Card, CardContent, Typography } from "@mui/material";
 
 type TodoCardProps = {
   id: number;
@@ -9,7 +9,12 @@ type TodoCardProps = {
   onToggle: (id: number, completed: boolean) => void;
 };
 
-const TodoCard: React.FC<TodoCardProps> = ({ id, title, completed, onToggle }) => {
+const TodoCard: React.FC<TodoCardProps> = ({
+  id,
+  title,
+  completed,
+  onToggle,
+}) => {
   return (
     <Card>
       <CardContent>

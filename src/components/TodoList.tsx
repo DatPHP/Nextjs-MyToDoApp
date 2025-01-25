@@ -1,16 +1,17 @@
 "use client";
 
-import { DataGrid } from '@mui/x-data-grid';
-import { useTodosQuery } from '@hooks/useTodosQuery';
-import { Button } from '@mui/material';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteTodo } from '@services/todosService';
-import Link from 'next/link';
+import { DataGrid } from "@mui/x-data-grid";
+import { useTodosQuery } from "@hooks/useTodosQuery";
+import { Button, IconButton } from "@mui/material";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteTodo } from "@services/todosService";
+import Link from "next/link";
 
 const TodoList = () => {
   const queryClient = useQueryClient();
-  const deleteMutation = useMutation({ mutationFn: deleteTodo, 
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
+  const deleteMutation = useMutation({
+    mutationFn: deleteTodo,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
   });
 
   const handleDelete = (id: number) => {
@@ -19,34 +20,36 @@ const TodoList = () => {
   const { data: todos, isLoading, error } = useTodosQuery();
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: "id", headerName: "ID", width: 90 },
     {
-      field: 'todo',
-      headerName: 'Title',
+      field: "todo",
+      headerName: "Title",
       width: 250,
       renderCell: (params: any) => (
-        <Link href={`/todos/${params.row.id}`} className="text-blue-500 underline">
+        <Link
+          href={`/todos/${params.row.id}`}
+          className="text-blue-500 underline"
+        >
           {params.value}
         </Link>
       ),
     },
     {
-      field: 'completed',
-      headerName: 'Completed',
+      field: "completed",
+      headerName: "Completed",
       width: 150,
-      renderCell: (params: any) => (params.value ? 'Yes' : 'No'),
+      renderCell: (params: any) => (params.value ? "Yes" : "No"),
     },
     {
-      field: 'actions',
-      headerName: 'Actions',
+      field: "actions",
+      headerName: "Actions",
       renderCell: (params: any) => (
-        <Button
-          variant="outlined"
-          color="error"
-          onClick={() => handleDelete(params.row.id)}
+        <Link
+          href={`/todos/${params.row.id}`}
+          className="text-gray-500 text-sm no-underline"
         >
-          Delete
-        </Button>
+          <Button className="text-gray-500 text-sm">Edit</Button>
+        </Link>
       ),
     },
   ];
@@ -55,22 +58,21 @@ const TodoList = () => {
   if (error) return <p>Error loading todos!</p>;
 
   return (
-    <div style={{ height: 400, width: '800px' }}>
-      <DataGrid 
-      rows={todos || []}
-      columns={columns}
-      initialState={{
-        pagination: {
-          paginationModel: {
-            pageSize: 5,
+    <div style={{ height: 400, width: "auto" }}>
+      <DataGrid
+        rows={todos || []}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
+            },
           },
-        },
-      }}
-      pageSizeOptions={[5]}
-      checkboxSelection
-      disableRowSelectionOnClick
-    />
-    
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
     </div>
   );
 };

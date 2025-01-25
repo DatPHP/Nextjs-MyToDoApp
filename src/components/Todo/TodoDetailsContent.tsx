@@ -11,12 +11,16 @@ interface ITodoDetailsContent {
 }
 
 const TodoDetailsContent: React.FC<ITodoDetailsContent> = ({ id }) => {
-  const { data: todo, isLoading, error } = useQuery({
+  const {
+    data: todo,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["todo", id],
     queryFn: () => fetchTodoById(Number(id)),
   });
 
-  const todoData :any = todo || undefined
+  const todoData: any = todo || undefined;
 
   const router = useRouter();
 
@@ -26,7 +30,10 @@ const TodoDetailsContent: React.FC<ITodoDetailsContent> = ({ id }) => {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Edit Todo</h1>
-      <TodoForm todo={todoData || undefined} onSuccess={() => router.push("/")} />
+      <TodoForm
+        todo={todoData || undefined}
+        onSuccess={() => router.push("/")}
+      />
     </div>
   );
 };

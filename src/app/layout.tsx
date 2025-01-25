@@ -1,9 +1,12 @@
 // src/app/layout.tsx
 import "./globals.css";
-import { Inter } from "next/font/google";
 import QueryProvider from "../components/QueryProvider"; // Import QueryProvider
+import { Roboto } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // Optional: Customize weights
+});
 
 export const metadata = {
   title: "Todo List App",
@@ -16,7 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning={true}>
+    <html
+      lang="en"
+      className={roboto.className}
+      suppressHydrationWarning={true}
+    >
       <body>
         <QueryProvider>{children}</QueryProvider>
       </body>
