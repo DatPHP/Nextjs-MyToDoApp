@@ -5,6 +5,7 @@ import { TextField, Button, Checkbox, FormControlLabel } from "@mui/material";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTodo, updateTodo } from "@services/todosService";
 import { Todo } from "../types/todos";
+import { toast } from "react-toastify";
 
 interface ITodoForm {
   todo?: Todo; // For edit mode
@@ -21,6 +22,7 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
     mutationFn: createTodo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
+      toast.success("Todo created successfully!");
       onSuccess?.();
     },
   });
@@ -33,6 +35,7 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
     }) => updateTodo(updates.id, updates.updates),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
+      toast.success("Todo updated successfully!");
       onSuccess?.();
     },
   });

@@ -5,9 +5,16 @@ const API_URL = "https://dummyjson.com/todos";
 interface TodosResponse {
   todos: { id: number; todo: string; completed: boolean }[];
 }
-
+// Fetch all todos
 export const fetchTodos = async () => {
-  const { data } = await axios.get<TodosResponse>(`${API_URL}`);
+  const { data } = await axios.get<TodosResponse>(
+    `${API_URL}?limit=${254}&skip=${0}`,
+  );
+  return data?.todos;
+};
+// get dotos by user
+export const fetchTodosByUser = async () => {
+  const { data } = await axios.get<TodosResponse>(`${API_URL}/user/1`);
   return data?.todos;
 };
 
