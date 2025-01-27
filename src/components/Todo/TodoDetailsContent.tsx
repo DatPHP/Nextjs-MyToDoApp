@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchTodoById } from "@services/todosService";
 import { useRouter } from "next/navigation";
 import TodoForm from "../TodoForm";
+import { TextField, Button, IconButton } from "@mui/material";
 
 interface ITodoDetailsContent {
   id: string;
@@ -29,7 +30,6 @@ const TodoDetailsContent: React.FC<ITodoDetailsContent> = ({ id }) => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Edit Todo</h1>
       <TodoForm
         todo={todoData || undefined}
         onSuccess={() => router.push("/")}

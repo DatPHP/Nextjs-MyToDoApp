@@ -9,7 +9,6 @@ const CreateTodoContent: React.FC = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Create Todo</h1>
       <TodoForm onSuccess={() => router.push("/")} />
     </div>
   );

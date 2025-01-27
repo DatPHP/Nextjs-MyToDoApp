@@ -31,7 +31,7 @@ const TodoList = () => {
     details: task.todo,
     completed: task.completed,
     hasNotification: true,
-    hasAlert: true,
+    hasAlert: false,
   }));
 
   if (isLoading) return <p>Loading...</p>;
@@ -42,18 +42,18 @@ const TodoList = () => {
       {todoList?.map((task: any, index: number) => (
         <div
           key={index}
-          className="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm"
+          className="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm"
         >
           <div className="flex items-center">
             <Checkbox
               icon={<RadioButtonUncheckedIcon />}
-              checkedIcon={<RadioButtonCheckedIcon />}
+              checkedIcon={<svg fill="orange" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m10 17-5-5 1.41-1.42 3.59 3.59 7.59-7.59 1.41 1.42m-7-6a10 10 0 0 0 -10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10 10 10 0 0 0 -10-10z"/></svg>}
               checked={task.completed}
             />
             <div>
               <Typography
                 variant="body1"
-                className={task.completed ? "line-through text-gray-400" : ""}
+                className={task.completed ? " text-gray-400" : ""}
               >
                 {task.label}
               </Typography>
@@ -78,7 +78,8 @@ const TodoList = () => {
               href={`/todos/${task.id}`}
               className="text-gray-500 text-sm no-underline"
             >
-              <Button className="text-gray-500 text-sm">Edit</Button>
+              <Button className="text-gray-500 text-sm">Edit
+              </Button>
             </Link>
           </div>
         </div>

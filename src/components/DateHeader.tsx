@@ -10,42 +10,26 @@ import "react-calendar/dist/Calendar.css";
 export default function DateHeader() {
   const today: any = dayjs(); // Current date
   const helloToday = dayjs().format("dddd, MMM D");
-
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  console.log(selectedDate);
   const toggleCalendar = () => {
     setCalendarOpen((prev) => !prev);
   };
 
   const currentDay = selectedDate ? dayjs(selectedDate) : today;
-
-  console.log(today);
   const startOfWeek = currentDay.startOf("week"); // Get Sunday of this week
-  console.log(startOfWeek);
   const daysOfWeek = Array.from({ length: 7 }, (_, i) =>
     startOfWeek.add(i, "day"),
   ); // Full week
-  console.log(daysOfWeek);
 
   return (
-    <Box className="bg-white p-6 shadow-md rounded-xl">
+    <Box className="bg-gray-50 px-6 pt-4 shadow-md relative">
       {/* Header */}
-      {/* <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-4">
         <div>
-          <Typography variant="body2" color="textSecondary">
-             {today.format("dddd, MMMM D, YYYY")} 
-            {helloToday}
-          </Typography>
-          <Typography variant="h4" fontWeight="bold">
-            To-Do List
-          </Typography>
-        </div>
-      </div> */}
-
-      <div className="flex justify-between items-center">
-        <div>
-          <Typography variant="body2" color="textSecondary">
+          <Typography variant="h6"
+           className="text-gray-400 text-sm tracking-wide uppercase font-semibold"
+         >
             {helloToday}
           </Typography>
           <Typography variant="h4" fontWeight="bold">
@@ -63,7 +47,7 @@ export default function DateHeader() {
       {/* Calendar Popup */}
       {calendarOpen && (
         <Box
-          className="absolute top-15 right-8 bg-white shadow-lg rounded-lg z-10 p-2"
+          className="absolute top-15 right-8 bg-gray-50 shadow-lg rounded-lg z-10 p-2"
           style={{ width: "300px" }}
         >
           <Calendar
@@ -77,34 +61,34 @@ export default function DateHeader() {
       )}
 
       {/* Week Date Range */}
-      <div className="mt-6 flex justify-between items-center">
+      <div className="mt-10 mb-5 flex justify-between items-center">
         {daysOfWeek.map((day, index) => (
           <Box
             key={index}
             className={`flex flex-col items-center ${
               currentDay.isSame(day, "date")
-                ? "text-white bg-gray-300 rounded-lg px-3 py-2"
+                ? "text-black border-b-4 border-black px-5 py-3"
                 : ""
             }
-          
-            ${
-              today.isSame(day, "date")
-                ? "text-white bg-blue-300 rounded-lg px-3 py-2"
-                : ""
-            }`}
+          `}
           >
-            <Typography variant="body2" className="text-gray-800">
+            <Typography variant="body2" 
+            className={`front-weight-bold
+            ${
+              currentDay.isSame(day, "date")
+                ? "text-black font-bold"
+                : "text-gray-300"
+            }`
+          }
+            >
               {day.format("dd").split("")[0]}{" "}
               {/*Short day name   example :su : s mo: m tu : t */}
             </Typography>
             <Typography
               variant="h6"
               className={`mt-1 
-
-                ${today.isSame(day, "date") ? "font-bold" : "text-gray-700"}
-                
                 ${
-                  currentDay.isSame(day, "date") ? "font-bold" : "text-gray-700"
+                  currentDay.isSame(day, "date") ? "text-black  font-bold" : "text-gray-300"
                 }`}
             >
               {day.format("D")}
