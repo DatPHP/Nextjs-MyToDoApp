@@ -8,8 +8,10 @@ const CreateTodoContent: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div>
-      <TodoForm onSuccess={() => router.push("/")} />
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+      <div className="w-[450px] bg-gray-50 p-6 rounded-2xl shadow-md">
+        <TodoForm onSuccess={() => router.push("/")} />
+      </div>
     </div>
   );
 };

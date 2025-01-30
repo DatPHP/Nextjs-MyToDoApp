@@ -1,25 +1,46 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { TextField, Button,IconButton, Checkbox, FormControlLabel } from "@mui/material";
+import {
+  TextField,
+  Button,
+  IconButton,
+  Checkbox,
+  FormControlLabel,
+} from "@mui/material";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTodo, updateTodo } from "@services/todosService";
 import { Todo } from "../types/todos";
 import { toast } from "react-toastify";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useRouter } from "next/navigation";
+import { useForm, Controller } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { todoSchema } from "@utils/zodSchemas";
 
 interface ITodoForm {
   todo?: Todo; // For edit mode
   onSuccess?: () => void;
 }
 
+type TodoFormData = z.infer<typeof todoSchema>;
 const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
   const router = useRouter();
-  const [title, setTitle] = useState(todo?.todo || "");
-  const [completed, setCompleted] = useState(todo?.completed || false);
   const queryClient = useQueryClient();
-  const formRef = useRef<HTMLFormElement>(null);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<TodoFormData>({
+    resolver: zodResolver(todoSchema),
+    defaultValues: {
+      title: todo?.todo || "",
+      completed: todo?.completed || false,
+    },
+  });
 
   // Mutation for creating a todo
   const createMutation = useMutation({
@@ -44,94 +65,106 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit = (data: TodoFormData) => {
     if (todo) {
-      // Update existing todo
       updateMutation.mutate({
         id: todo.id,
-        updates: { todo: title, completed },
+        updates: { todo: data.title, completed: data.completed },
       });
     } else {
-      // Create a new todo
-      createMutation.mutate({ todo: title, completed, userId: 1 });
+      createMutation.mutate({
+        todo: data.title,
+        completed: data?.completed || false,
+        userId: 1,
+      });
     }
   };
 
   const handleCancel = () => {
-    router.push("/")
+    router.push("/");
   };
 
   return (
     <>
-     <form onSubmit={handleSubmit} className="space-y-6">
-    <div className="flex justify-between items-center mb-4">
-
-          <Button variant="text" className="text-gray-900" onClick={handleCancel}>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="flex justify-between items-center mb-4">
+          <Button
+            variant="text"
+            className="text-gray-900 capitalize"
+            onClick={handleCancel}
+          >
             Cancel
           </Button>
-          <Button 
-              variant="text"
-               className="text-gray-900"
-               type="submit">
-            {todo ? 'Update task' : 'Add task'}
+          <Button
+            variant="text"
+            className="text-gray-900 capitalize"
+            type="submit"
+          >
+            {todo ? "Update task" : "Add task"}
           </Button>
-            </div>
- 
-    <TextField
-      variant="standard"
-      placeholder="Write your task"
-      value={title}
-      onChange={(e) => setTitle(e.target.value)}
-      InputProps={{ disableUnderline: true }}
-      fullWidth
-      className="text-gray-400 text-2xl"
-    />
-
-    <FormControlLabel
-      control={
-        <Checkbox
-          checked={completed}
-          onChange={(e) => setCompleted(e.target.checked)}
+        </div>
+        <TextField
+          variant="standard"
+          placeholder="Write your task"
+          fullWidth
+          className="text-gray-400 text-2xl"
+          {...register("title")}
+          error={!!errors.title}
+          helperText={errors.title?.message}
+          InputProps={{
+            disableUnderline: true,
+            sx: { fontSize: "26px" },
+          }}
         />
-      }
-      label="Completed"
-    />
 
-    {/* Options */}
-    <div className="divide-y divide-gray-200">
-      <div className="flex justify-between items-center py-4">
-        <span className="text-gray-500 text-sm font-semibold">Alarm</span>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-400">None</span>
-          <IconButton size="small">
-            <ArrowForwardIosIcon fontSize="small" />
-          </IconButton>
-        </div>
-      </div>
+        <Controller
+          name="completed"
+          control={control}
+          render={({ field }) => (
+            <FormControlLabel
+              control={<Checkbox {...field} checked={field.value} />}
+              label="Completed"
+            />
+          )}
+        />
 
-      <div className="flex justify-between items-center py-4">
-        <span className="text-gray-500 text-sm font-semibold">Reminder</span>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-400">10:00 am</span>
-          <IconButton size="small">
-            <ArrowForwardIosIcon fontSize="small" />
-          </IconButton>
-        </div>
-      </div>
+        {/* Options */}
+        <div className="divide-y divide-gray-200">
+          <div className="flex justify-between items-center py-4">
+            <span className="text-gray-500 text-sm font-semibold">Alarm</span>
+            <div className="flex items-center space-x-2">
+              <span className="text-gray-400">None</span>
+              <IconButton size="small">
+                <ArrowForwardIosIcon fontSize="small" />
+              </IconButton>
+            </div>
+          </div>
 
-      <div className="flex justify-between items-center py-4">
-        <span className="text-gray-500 text-sm font-semibold">Priority</span>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-400">Low</span>
-          <IconButton size="small">
-            <ArrowForwardIosIcon fontSize="small" />
-          </IconButton>
+          <div className="flex justify-between items-center py-4">
+            <span className="text-gray-500 text-sm font-semibold">
+              Reminder
+            </span>
+            <div className="flex items-center space-x-2">
+              <span className="text-gray-400">10:00 am</span>
+              <IconButton size="small">
+                <ArrowForwardIosIcon fontSize="small" />
+              </IconButton>
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center py-4">
+            <span className="text-gray-500 text-sm font-semibold">
+              Priority
+            </span>
+            <div className="flex items-center space-x-2">
+              <span className="text-gray-400">Low</span>
+              <IconButton size="small">
+                <ArrowForwardIosIcon fontSize="small" />
+              </IconButton>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    </form>
+      </form>
     </>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTodosQuery } from "@hooks/useTodosQuery";
-import { Checkbox, IconButton, Button, Typography } from "@mui/material";
+import { Checkbox, Button, Typography } from "@mui/material";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTodo } from "@services/todosService";
 import Link from "next/link";
@@ -25,7 +25,7 @@ const TodoList = () => {
   const { data: todos, isLoading, error } = useTodosQuery();
 
   // map initial sample data to match the TodoCardProps
-  const todoList: any = todos?.map((task) => ({
+  const todoList = todos?.map((task) => ({
     id: task.id,
     label: task.todo,
     details: task.todo,
@@ -42,12 +42,23 @@ const TodoList = () => {
       {todoList?.map((task: any, index: number) => (
         <div
           key={index}
-          className="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm"
+          className="flex justify-between bg-gray-50 p-4 border-b-2 border-gray-100 shadow-sm"
         >
           <div className="flex items-center">
             <Checkbox
+              size="large"
               icon={<RadioButtonUncheckedIcon />}
-              checkedIcon={<svg fill="orange" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m10 17-5-5 1.41-1.42 3.59 3.59 7.59-7.59 1.41 1.42m-7-6a10 10 0 0 0 -10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10 10 10 0 0 0 -10-10z"/></svg>}
+              checkedIcon={
+                <svg
+                  fill="orange"
+                  height="36"
+                  width="36"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="m10 17-5-5 1.41-1.42 3.59 3.59 7.59-7.59 1.41 1.42m-7-6a10 10 0 0 0 -10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10 10 10 0 0 0 -10-10z" />
+                </svg>
+              }
               checked={task.completed}
             />
             <div>
@@ -55,31 +66,40 @@ const TodoList = () => {
                 variant="body1"
                 className={task.completed ? " text-gray-400" : ""}
               >
-                {task.label}
+                <span
+                  className="text-medium font-extrabold"
+                  style={{ fontSize: "18px" }}
+                >
+                  {task.label}
+                </span>
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                {task.details}
+                <span
+                  className={`text-sm ${task.completed ? "text-gray-400" : ""}`}
+                  style={{ fontSize: "11px" }}
+                >
+                  {task.details}
+                </span>
               </Typography>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex space-x-4">
             {task?.hasNotification && (
-              <IconButton className="text-gray-500">
-                <Notifications />
-              </IconButton>
+              <p className="text-black">
+                <Notifications fontSize="small" style={{ fontSize: "13px" }} />
+              </p>
             )}
             {task?.hasAlert && (
-              <IconButton className="text-yellow-500">
-                <CircleNotificationsOutlined />
-              </IconButton>
+              <p className="text-yellow-500">
+                <CircleNotificationsOutlined
+                  fontSize="small"
+                  style={{ fontSize: "13px" }}
+                />
+              </p>
             )}
 
-            <Link
-              href={`/todos/${task.id}`}
-              className="text-gray-500 text-sm no-underline"
-            >
-              <Button className="text-gray-500 text-sm">Edit
-              </Button>
+            <Link href={`/todos/${task.id}`} className="text-black text-sm">
+              <Button className="text-black text-sm normal-case">Edit</Button>
             </Link>
           </div>
         </div>

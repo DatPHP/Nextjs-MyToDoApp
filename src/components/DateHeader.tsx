@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { IconButton, Button, Typography, Box } from "@mui/material";
+import { IconButton, Typography, Box } from "@mui/material";
 import dayjs from "dayjs";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import Calendar from "react-calendar";
@@ -27,9 +27,10 @@ export default function DateHeader() {
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <div>
-          <Typography variant="h6"
-           className="text-gray-400 text-sm tracking-wide uppercase font-semibold"
-         >
+          <Typography
+            variant="h6"
+            className="text-gray-400 text-sm tracking-wide uppercase font-semibold"
+          >
             {helloToday}
           </Typography>
           <Typography variant="h4" fontWeight="bold">
@@ -72,14 +73,14 @@ export default function DateHeader() {
             }
           `}
           >
-            <Typography variant="body2" 
-            className={`front-weight-bold
+            <Typography
+              variant="body2"
+              className={`front-weight-bold
             ${
               currentDay.isSame(day, "date")
                 ? "text-black font-bold"
                 : "text-gray-300"
-            }`
-          }
+            }`}
             >
               {day.format("dd").split("")[0]}{" "}
               {/*Short day name   example :su : s mo: m tu : t */}
@@ -88,7 +89,9 @@ export default function DateHeader() {
               variant="h6"
               className={`mt-1 
                 ${
-                  currentDay.isSame(day, "date") ? "text-black  font-bold" : "text-gray-300"
+                  currentDay.isSame(day, "date")
+                    ? "text-black  font-bold"
+                    : "text-gray-300"
                 }`}
             >
               {day.format("D")}
