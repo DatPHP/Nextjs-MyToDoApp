@@ -42,7 +42,7 @@ const TodoList = () => {
       {todoList?.map((task: any, index: number) => (
         <div
           key={index}
-          className="flex justify-between bg-gray-50 p-4 border-b-2 border-gray-100 shadow-sm"
+          className="flex justify-between bg-gray-50 p-4 border-b-2 border-gray-100"
         >
           <div className="flex items-center">
             <Checkbox
