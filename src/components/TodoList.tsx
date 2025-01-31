@@ -68,7 +68,7 @@ const TodoList = () => {
               >
                 <span
                   className="text-medium font-extrabold"
-                  style={{ fontSize: "18px" }}
+                  style={{ fontSize: "16px" }}
                 >
                   {task.label}
                 </span>
@@ -76,7 +76,7 @@ const TodoList = () => {
               <Typography variant="body2" color="textSecondary">
                 <span
                   className={`text-sm ${task.completed ? "text-gray-400" : ""}`}
-                  style={{ fontSize: "11px" }}
+                  style={{ fontSize: "10px" }}
                 >
                   {task.details}
                 </span>
@@ -100,7 +100,7 @@ const TodoList = () => {
             )}
             </div>
             <Link href={`/todos/${task.id}`} className="text-black text-sm ml-6">
-              <Button className="text-black text-sm normal-case">Edit</Button>
+              <Button className="text-black text-sm normal-case" style={{ fontSize: "12px" }}>Edit</Button>
             </Link>
           </div>
         </div>
