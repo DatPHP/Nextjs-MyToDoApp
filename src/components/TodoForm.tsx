@@ -90,14 +90,14 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
         <div className="flex justify-between items-center mb-4">
           <Button
             variant="text"
-            className="text-gray-900 capitalize"
+            className="text-gray-600 font-bold capitalize"
             onClick={handleCancel}
           >
             Cancel
           </Button>
           <Button
             variant="text"
-            className="text-gray-900 capitalize"
+            className="text-gray-900 font-bold capitalize"
             type="submit"
           >
             {todo ? "Update task" : "Add task"}

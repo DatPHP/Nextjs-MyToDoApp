@@ -23,10 +23,10 @@ export default function DateHeader() {
   ); // Full week
 
   return (
-    <Box className="bg-gray-50 px-6 pt-4 shadow-md relative">
+    <Box className="bg-gray-50 pt-10 shadow-md relative">
       {/* Header */}
-      <div className="flex justify-between items-center mb-4">
-        <div>
+      <div className="flex justify-between items-center mb-4 px-6">
+        <div className="mx-2">
           <Typography
             variant="h6"
             className="text-gray-400 text-sm tracking-wide uppercase font-semibold"
@@ -37,6 +37,7 @@ export default function DateHeader() {
             To-Do List
           </Typography>
         </div>
+        <div className="mr-4">
         <IconButton
           className="text-gray-500"
           onClick={toggleCalendar}
@@ -44,6 +45,7 @@ export default function DateHeader() {
         >
           <CalendarTodayIcon fontSize="medium" />
         </IconButton>
+        </div>
       </div>
       {/* Calendar Popup */}
       {calendarOpen && (
@@ -62,7 +64,7 @@ export default function DateHeader() {
       )}
 
       {/* Week Date Range */}
-      <div className="mt-10 mb-5 flex justify-between items-center">
+      <div className="mt-10 mb-5 flex justify-between items-center px-2">
         {daysOfWeek.map((day, index) => (
           <Box
             key={index}

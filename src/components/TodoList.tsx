@@ -42,12 +42,12 @@ const TodoList = () => {
       {todoList?.map((task: any, index: number) => (
         <div
           key={index}
-          className="flex justify-between bg-gray-50 p-4 border-b-2 border-gray-100"
+          className="flex justify-between bg-gray-50 px-2 py-4 border-b-2 border-gray-100"
         >
           <div className="flex items-center">
             <Checkbox
               size="large"
-              icon={<RadioButtonUncheckedIcon />}
+              icon={<RadioButtonUncheckedIcon className="outline-none"/>}
               checkedIcon={
                 <svg
                   fill="orange"
@@ -61,7 +61,7 @@ const TodoList = () => {
               }
               checked={task.completed}
             />
-            <div>
+            <div className="ml-2 md:ml-4">
               <Typography
                 variant="body1"
                 className={task.completed ? " text-gray-400" : ""}
@@ -83,8 +83,9 @@ const TodoList = () => {
               </Typography>
             </div>
           </div>
-          <div className="flex space-x-4">
-            {task?.hasNotification && (
+          <div className="flex mr-2 md:mr-3 gap-2 md:gap-5">
+            <div>
+              {task?.hasNotification && (
               <p className="text-black">
                 <Notifications fontSize="small" style={{ fontSize: "13px" }} />
               </p>
@@ -97,8 +98,8 @@ const TodoList = () => {
                 />
               </p>
             )}
-
-            <Link href={`/todos/${task.id}`} className="text-black text-sm">
+            </div>
+            <Link href={`/todos/${task.id}`} className="text-black text-sm ml-6">
               <Button className="text-black text-sm normal-case">Edit</Button>
             </Link>
           </div>
