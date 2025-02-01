@@ -1,15 +1,12 @@
 import React from "react";
 import TodoDetailsContent from "@components/Todo/TodoDetailsContent";
-import { NextPage } from "next";
 
-interface ITodoDetails {
+interface PageProps {
   params: { id: string };
 }
 
-const TodoDetails: NextPage<ITodoDetails> = async ({ params }) => {
-  const { id } = params;
+export default async function TodoDetails({ params }: PageProps) {
+  const awaitedParams = await params; // Explicitly await params (if required by Next.js)
 
-  return <TodoDetailsContent id={id} />;
-};
-
-export default TodoDetails;
+  return <TodoDetailsContent id={awaitedParams.id} />;
+}
