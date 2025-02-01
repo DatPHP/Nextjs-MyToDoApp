@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { roboto } from "@fonts/fonts";
 
 export default function DateHeader() {
   const today: any = dayjs(); // Current date
@@ -23,13 +24,13 @@ export default function DateHeader() {
   ); // Full week
 
   return (
-    <Box className="bg-gray-50 pt-10 shadow-md relative">
+    <Box className="pt-10 shadow-md relative">
       {/* Header */}
       <div className="flex justify-between items-center mb-4 px-6">
         <div className="mx-2">
           <Typography
             variant="h6"
-            className="text-gray-400 text-sm tracking-wide uppercase font-semibold"
+            className="todayTime tracking-wide uppercase font-semibold"
           >
             {helloToday}
           </Typography>
@@ -38,13 +39,13 @@ export default function DateHeader() {
           </Typography>
         </div>
         <div className="mr-4">
-        <IconButton
-          className="text-gray-500"
-          onClick={toggleCalendar}
-          aria-label="Open calendar"
-        >
-          <CalendarTodayIcon fontSize="medium" />
-        </IconButton>
+          <IconButton
+            className="text-gray-500"
+            onClick={toggleCalendar}
+            aria-label="Open calendar"
+          >
+            <CalendarTodayIcon fontSize="medium" />
+          </IconButton>
         </div>
       </div>
       {/* Calendar Popup */}
@@ -68,9 +69,9 @@ export default function DateHeader() {
         {daysOfWeek.map((day, index) => (
           <Box
             key={index}
-            className={`flex flex-col items-center ${
+            className={`flex flex-col items-center pb-3 ${
               currentDay.isSame(day, "date")
-                ? "text-black border-b-4 border-black px-5 py-3"
+                ? "text-black border-b-4 border-black px-5"
                 : ""
             }
           `}
@@ -89,11 +90,11 @@ export default function DateHeader() {
             </Typography>
             <Typography
               variant="h6"
-              className={`mt-1 
+              className={`leading-[1]
                 ${
                   currentDay.isSame(day, "date")
                     ? "text-black  font-bold"
-                    : "text-gray-300"
+                    : "text-gray-400"
                 }`}
             >
               {day.format("D")}

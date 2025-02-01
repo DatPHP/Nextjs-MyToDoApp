@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React from "react";
 import {
   TextField,
   Button,
@@ -18,6 +18,7 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { todoSchema } from "@utils/zodSchemas";
+import "@styles/main.css";
 
 interface ITodoForm {
   todo?: Todo; // For edit mode
@@ -87,10 +88,10 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-4 px-6">
           <Button
             variant="text"
-            className="text-gray-600 font-bold capitalize"
+            className="cancelBtn font-bold capitalize"
             onClick={handleCancel}
           >
             Cancel
@@ -107,7 +108,9 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
           variant="standard"
           placeholder="Write your task"
           fullWidth
-          className="text-gray-400 text-2xl"
+          multiline
+          minRows={1}
+          className="todoInput text-2xl px-6"
           {...register("title")}
           error={!!errors.title}
           helperText={errors.title?.message}
@@ -122,6 +125,7 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
           control={control}
           render={({ field }) => (
             <FormControlLabel
+              hidden
               control={<Checkbox {...field} checked={field.value} />}
               label="Completed"
             />
@@ -130,36 +134,32 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
 
         {/* Options */}
         <div className="divide-y divide-gray-200">
-          <div className="flex justify-between items-center py-4">
-            <span className="text-gray-500 text-sm font-semibold">Alarm</span>
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-400">None</span>
+          <div className="flex justify-between items-center py-4 px-6">
+            <span className="titleOption text-sm font-semibold">Alarm</span>
+            <div className="flex items-center">
+              <span className="todoOption">None</span>
               <IconButton size="small">
-                <ArrowForwardIosIcon fontSize="small" />
+                <ArrowForwardIosIcon fontSize="small" className="todoOption" />
               </IconButton>
             </div>
           </div>
 
-          <div className="flex justify-between items-center py-4">
-            <span className="text-gray-500 text-sm font-semibold">
-              Reminder
-            </span>
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-400">10:00 am</span>
+          <div className="flex justify-between items-center py-4 px-6">
+            <span className="titleOption text-sm font-semibold">Reminder</span>
+            <div className="flex items-center">
+              <span className="todoOption">10:00 am</span>
               <IconButton size="small">
-                <ArrowForwardIosIcon fontSize="small" />
+                <ArrowForwardIosIcon fontSize="small" className="todoOption" />
               </IconButton>
             </div>
           </div>
 
-          <div className="flex justify-between items-center py-4">
-            <span className="text-gray-500 text-sm font-semibold">
-              Priority
-            </span>
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-400">Low</span>
+          <div className="flex justify-between items-center py-4 px-6">
+            <span className="titleOption text-sm font-semibold">Priority</span>
+            <div className="flex items-center">
+              <span className="todoOption">Low</span>
               <IconButton size="small">
-                <ArrowForwardIosIcon fontSize="small" />
+                <ArrowForwardIosIcon fontSize="small" className="todoOption" />
               </IconButton>
             </div>
           </div>

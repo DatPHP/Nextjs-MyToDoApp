@@ -1,12 +1,7 @@
 // src/app/layout.tsx
 import "./globals.css";
-import QueryProvider from "../components/QueryProvider"; // Import QueryProvider
-import { Roboto } from "next/font/google";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"], // Optional: Customize weights
-});
+import QueryProvider from "../components/QueryProvider";
+import { roboto } from "@fonts/fonts";
 
 export const metadata = {
   title: "Todo List App",
@@ -19,12 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={roboto.className}
-      suppressHydrationWarning={true}
-    >
-      <body>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className={roboto.className}>
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
