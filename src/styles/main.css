@@ -12,16 +12,26 @@
   color: #939391;
 }
 
+.numberDay {
+  font-size: 15px;
+}
+
+.stringDay {
+  font-size: 10px;
+}
+
 .todooRow {
   line-height: 1;
 }
 
 .todoTitle {
   font-size: 16px;
+  font-weight: 600;
 }
 
 .todoActiveTile {
-  color: #6b6b69;
+  font-weight: 600;
+  color: #b9bab7;
 }
 
 .todoDetails {

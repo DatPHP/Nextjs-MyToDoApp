@@ -78,23 +78,23 @@ export default function DateHeader() {
           >
             <Typography
               variant="body2"
-              className={`front-weight-bold
+              className={`front-weight-bold stringDay
             ${
               currentDay.isSame(day, "date")
                 ? "text-black font-bold"
-                : "text-gray-300"
+                : "text-gray-300 font-bold"
             }`}
             >
               {day.format("dd").split("")[0]}{" "}
               {/*Short day name   example :su : s mo: m tu : t */}
             </Typography>
             <Typography
-              variant="h6"
-              className={`leading-[1]
+              variant="body2"
+              className={`leading-[1] numberDay
                 ${
                   currentDay.isSame(day, "date")
                     ? "text-black  font-bold"
-                    : "text-gray-400"
+                    : "text-gray-400 font-bold"
                 }`}
             >
               {day.format("D")}

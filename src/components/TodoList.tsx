@@ -10,6 +10,7 @@ import {
   CircleNotificationsOutlined,
 } from "@mui/icons-material";
 import "@styles/main.css";
+import { roboto } from "@fonts/fonts";
 
 const TodoList = () => {
   const queryClient = useQueryClient();
@@ -42,7 +43,7 @@ const TodoList = () => {
           key={index}
           className="flex justify-between px-2 py-4 border-b-2 border-gray-100"
         >
-          <div className="flex items-center">
+          <div className={`flex items-center ${roboto.className}`}>
             <Checkbox
               size="large"
               icon={
@@ -60,7 +61,7 @@ const TodoList = () => {
               }
               checkedIcon={
                 <svg
-                  fill="#f4d143"
+                  fill="#f4d239"
                   height="32"
                   width="32"
                   viewBox="0 0 24 24"
@@ -76,7 +77,7 @@ const TodoList = () => {
                 variant="body1"
                 className={`todooRow ${task.completed ? "todoActiveTile" : ""}`}
               >
-                <span className="text-medium font-extrabol todoTitle">
+                <span className="text-medium todoTitle">
                   {task.label}
                 </span>
               </Typography>

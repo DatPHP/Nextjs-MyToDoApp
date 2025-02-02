@@ -8,10 +8,10 @@ export default function AddTodoButton() {
     <div className="flex justify-end mt-10">
       <Link
         href="/todos/create"
-        className="border-black bg-black border-4 rounded-lg flex items-center justify-center no-underline"
+        className="border-black bg-black rounded-lg flex items-center justify-center no-underline w-[52px] h-[52px]"
         style={{ borderWidth: 12 }}
       >
-        <div className="flex items-center justify-center bg-white rounded-full border-b-4 border-black">
+        <div className="flex items-center justify-center bg-white rounded-full border-black">
           <svg
             fill="#000000"
             height="24px"

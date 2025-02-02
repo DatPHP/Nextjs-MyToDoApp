@@ -1,10 +1,12 @@
 import React from "react";
 import TodoDetailsContent from "@components/Todo/TodoDetailsContent";
 
-interface PageProps {
+interface ITodoDetails {
   params: { id: string };
 }
 
-export default function TodoDetails({ params }: PageProps) {
-  return <TodoDetailsContent id={params.id} />;
+export default async function TodoDetails({ params }: ITodoDetails) {
+  const { id } = await params; 
+
+  return <TodoDetailsContent id={id} />;
 }
