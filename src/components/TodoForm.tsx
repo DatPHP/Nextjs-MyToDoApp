@@ -91,14 +91,14 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
         <div className="flex justify-between items-center mb-4 px-6">
           <Button
             variant="text"
-            className="cancelBtn font-bold capitalize"
+            className="cancelBtn !font-bold !capitalize"
             onClick={handleCancel}
           >
             Cancel
           </Button>
           <Button
             variant="text"
-            className="text-gray-900 font-bold capitalize"
+            className="!text-gray-900 !font-bold !capitalize"
             type="submit"
           >
             {todo ? "Update task" : "Add task"}
@@ -110,27 +110,27 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
           fullWidth
           multiline
           minRows={1}
-          className="todoInput text-2xl px-6"
+          className="todoInput text-2xl"
           {...register("title")}
-          error={!!errors.title}
-          helperText={errors.title?.message}
-          InputProps={{
+            error={!!errors.title}
+            helperText={errors.title?.message}
+            InputProps={{
             disableUnderline: true,
-            sx: { fontSize: "26px" },
-          }}
-        />
+            sx: { fontSize: "26px", px: 6 },
+            }}
+          />
 
-        <Controller
-          name="completed"
-          control={control}
-          render={({ field }) => (
+          <Controller
+            name="completed"
+            control={control}
+            render={({ field }) => (
             <FormControlLabel
-              hidden
+              className="!hidden"
               control={<Checkbox {...field} checked={field.value} />}
               label="Completed"
             />
-          )}
-        />
+            )}
+          />
 
         {/* Options */}
         <div className="divide-y divide-gray-200">
