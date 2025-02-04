@@ -110,7 +110,7 @@ const TodoList = () => {
               href={`/todos/${task.id}`}
               className="!text-black !text-sm !ml-6"
             >
-              <Button className="todo-edit-btn text-black">Edit</Button>
+              <Button className="todo-edit-btn !text-black">Edit</Button>
             </Link>
           </div>
         </div>

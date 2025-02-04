@@ -110,13 +110,13 @@ const TodoForm: React.FC<ITodoForm> = ({ todo, onSuccess }) => {
           fullWidth
           multiline
           minRows={1}
-          className="todoInput text-2xl"
+          className="todoInput !px-6"
           {...register("title")}
             error={!!errors.title}
             helperText={errors.title?.message}
             InputProps={{
             disableUnderline: true,
-            sx: { fontSize: "26px", px: 6 },
+            sx: { fontSize: "26px"},
             }}
           />
 

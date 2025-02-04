@@ -39,7 +39,7 @@
 }
 
 .todo-edit-btn {
-  font-size: 12px;
+  font-size: 12px !important;
   text-transform: none;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .todoInput {
-  color: #f0f0ee;
+  color: #f0f0ee !important;
 }
 
 .titleOption {
