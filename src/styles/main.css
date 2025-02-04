@@ -8,25 +8,25 @@
 }
 
 .todayTime {
-  font-size: 12px;
-  color: #939391;
+  font-size: 12px !important;
+  color: #939391 !important;
 }
 
 .numberDay {
-  font-size: 15px;
+  font-size: 15px !important;
 }
 
 .stringDay {
-  font-size: 10px;
+  font-size: 10px !important;
 }
 
 .todooRow {
-  line-height: 1;
+  line-height: 1 !important;
 }
 
 .todoTitle {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 16px !important;
+  font-weight: 600 !important;
 }
 
 .todoActiveTile {
